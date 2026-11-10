@@ -90,6 +90,85 @@
   .who { margin: 18px 0 2px; padding: 11px 14px; border: 1px solid var(--line); border-left: 3px solid var(--lime); border-radius: 10px; background: rgba(199, 242, 58, 0.05); font-weight: 600; font-size: 15px; color: var(--ink); }
   .gh, button, .chip { transition: border-color 150ms ease, background-color 150ms ease, opacity 150ms ease; }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+  /* The chain picker (the "slicer"): a logo button over a hidden <select> that still holds the value. From Safe to Send. */
+  .hl { color: var(--lime); }
+  .lg { flex: none; border-radius: 50%; filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.35)); }
+  .pick { position: relative; }
+  .pick-btn { width: 100%; display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 0 14px 0 12px; border-radius: 12px; border: 1px solid var(--line); background: #050822; color: var(--ink); font: 600 15px system-ui, sans-serif; text-align: left; cursor: pointer; }
+  .pick-btn:hover, .pick-btn[aria-expanded="true"] { border-color: var(--lime); }
+  .pick-btn.empty { color: var(--mute); font-weight: 500; }
+  .chev { margin-left: auto; color: var(--mute); }
+  .pick-menu { position: absolute; z-index: 30; left: 0; right: 0; top: calc(100% + 6px); padding: 8px; border-radius: 14px; border: 1px solid rgba(199, 242, 58, 0.4); background: #070b26; box-shadow: 0 24px 60px -10px #000; }
+  .pick-search { width: 100%; padding: 10px 12px; font: 14px system-ui, sans-serif; background: #050822; color: var(--ink); border: 1px solid var(--line); border-radius: 12px; }
+  .pick-quick { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 8px; }
+  .pick-pop { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 2px; border-radius: 10px; border: 1px solid var(--line); background: rgba(4, 6, 26, 0.6); color: var(--ink); font: 600 12px system-ui, sans-serif; cursor: pointer; }
+  .pick-pop img { width: 20px; height: 20px; border-radius: 50%; }
+  .pick-pop:hover { border-color: var(--lime); }
+  .pick-tabs { display: grid; grid-template-columns: 1fr; gap: 6px; margin-top: 8px; }
+  .pick-tab { display: grid; gap: 1px; padding: 7px 9px; border-radius: 10px; border: 1px solid var(--line); background: rgba(4, 6, 26, 0.6); color: var(--ink); text-align: left; cursor: pointer; }
+  .pick-tab b { font-size: 13px; }
+  .pick-tab small { color: var(--mute); font-size: 11px; }
+  .pick-tab:hover { border-color: rgba(199, 242, 58, 0.5); }
+  .pick-tab.on { border-color: var(--lime); background: rgba(199, 242, 58, 0.12); }
+  .pick-tab.on b { color: var(--lime); }
+  .pick-list { list-style: none; margin: 8px 0 0; padding: 0; max-height: 240px; overflow-y: auto; }
+  .pick-group { position: sticky; top: 0; z-index: 1; display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding: 8px 8px 6px; background: #070b26; border-bottom: 1px solid var(--line); }
+  .pick-group b { font-size: 13px; color: var(--lime); }
+  .pick-group small { color: var(--mute); font-size: 11.5px; }
+  .pick-row { display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 7px 8px; border-radius: 9px; cursor: pointer; font-size: 14.5px; }
+  .pick-row img { width: 26px; height: 26px; padding: 3px; border-radius: 50%; background: #0c1236; }
+  .pick-row em { font: 600 10.5px var(--mono); font-style: normal; color: var(--mute); white-space: nowrap; }
+  .pick-row:hover, .pick-row.active { background: rgba(199, 242, 58, 0.1); }
+  .pick-row.on { background: rgba(199, 242, 58, 0.16); }
+  .pick-row.on span { color: var(--lime); font-weight: 700; }
+  .pick-pointer { display: grid; gap: 4px; justify-items: start; padding: 8px 10px; margin-bottom: 6px; border-radius: 10px; background: rgba(143, 180, 255, 0.1); color: #d9dcec; font-size: 12.5px; line-height: 1.35; }
+  .pick-pointer button { padding: 0; border: 0; background: none; color: var(--lime); font: 700 12.5px system-ui, sans-serif; cursor: pointer; }
+  .pick-none { padding: 14px 8px; color: var(--mute); font-size: 14px; }
+
+  /* The wheel of blockchains: every chain we read, shown as coverage. */
+  .reads { margin-top: 26px; }
+  .rows-h { margin: 0; font-size: 18px; font-weight: 800; letter-spacing: -0.01em; }
+  .rows-note { margin: 6px 0 0; font-size: 14px; }
+  .chainrow { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; }
+  .chainrow li { display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 6px; padding: 10px 6px; text-align: center; font-size: 12.5px; line-height: 1.2; background: rgba(4, 6, 26, 0.55); border: 1px solid var(--line); border-radius: 12px; transition: border-color 150ms ease, transform 150ms ease; }
+  .chainrow li:hover { border-color: var(--lime); transform: translateY(-2px); }
+  .chainrow img { width: 30px; height: 30px; padding: 5px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #18204f, #070b22 70%); box-shadow: inset 0 0 0 1.5px rgba(199, 242, 58, 0.55); }
+  .chainrow small { color: var(--warn); font: 11px var(--mono); }
+  /* Near-black logos get a light disc so they read on the dark panel (as on Safe to Send). */
+  img[src$="/abstract.svg"], img[src$="/linea.svg"], img[src$="/sonic.svg"], img[src$="/zksync.svg"], img[src$="/gnosis.svg"], img[src$="/cronos.svg"], img[src$="/lisk.svg"], img[src$="/plasma.svg"], img[src$="/soneium.svg"] { background: radial-gradient(circle, #f3efe4 55%, #cfd3e8) !important; }
+  .chainrow .reveal { opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+  .chainrow .reveal.in { opacity: 1; transform: none; }
+
+  /* The example flow: the four answers, with one scene lit and cross-fading. Tasteful, not flashy. */
+  .scene { margin-top: 22px; padding: 20px; border: 1px solid rgba(199, 242, 58, 0.22); border-radius: 18px; background: linear-gradient(180deg, rgba(11, 16, 48, 0.7), rgba(4, 6, 26, 0.9)); }
+  .scene-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+  .scene-head h2 { margin: 0; font-size: 21px; font-weight: 800; letter-spacing: -0.015em; }
+  .scene-head p { margin: 5px 0 0; font-size: 14px; }
+  .scene-toggle { flex: none; padding: 7px 13px; border-radius: 10px; border: 1px solid var(--line); background: rgba(4, 6, 26, 0.6); color: var(--ink); font: 600 13px system-ui, sans-serif; cursor: pointer; }
+  .scene-toggle:hover { border-color: var(--lime); }
+  .gates { list-style: none; margin: 0 0 14px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .gate { display: grid; grid-template-columns: 32px minmax(0, 1fr); align-items: center; gap: 9px; padding: 8px; border-radius: 12px; border: 1px solid var(--line); background: rgba(6, 9, 34, 0.86); opacity: 0.6; transition: opacity 0.3s, border-color 0.3s, box-shadow 0.3s; }
+  .gate-m { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; color: var(--v); font: 800 15px system-ui, sans-serif; background: radial-gradient(circle at 35% 30%, #18204f, #070b22 72%); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--v) 70%, transparent); }
+  .gate-t { display: grid; min-width: 0; line-height: 1.2; }
+  .gate-t b { font-size: 13px; color: var(--v); }
+  .gate-t small { font-size: 11px; color: var(--mute); }
+  .gate.on { opacity: 1; border-color: var(--v); box-shadow: 0 0 0 1px var(--v), 0 0 30px -6px var(--v); }
+  .gate.on .gate-m { background: var(--v); color: #04061a; }
+  .gate.g-yes { --v: var(--yes); } .gate.g-danger { --v: var(--danger); } .gate.g-no { --v: #9aa0c8; } .gate.g-unknown { --v: var(--unknown); }
+  .readout { position: relative; overflow: hidden; display: grid; gap: 10px; padding: 16px 18px; min-height: 164px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--v, var(--line)) 55%, transparent); background: rgba(6, 9, 34, 0.9); transition: border-color 0.3s ease, opacity 0.35s ease; }
+  .readout.fade { opacity: 0; }
+  .readout.lv-yes { --v: var(--yes); } .readout.lv-danger { --v: var(--danger); } .readout.lv-no { --v: #9aa0c8; } .readout.lv-unknown { --v: var(--unknown); }
+  .ro-route { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font: 12px var(--mono); color: var(--mute); }
+  .ro-route img { width: 22px; height: 22px; padding: 3px; border-radius: 50%; background: #0c1236; }
+  .ro-route .arrow { color: var(--lime); font-weight: 700; }
+  .ro-title { margin: 2px 0 0; font-size: 18px; font-weight: 800; letter-spacing: -0.01em; color: var(--v, var(--ink)); }
+  .ro-detail { margin: 0; color: #d9dcec; font-size: 14px; line-height: 1.4; }
+  .scene-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .scene-tab { padding: 6px 11px; border-radius: 999px; border: 1px solid var(--line); background: rgba(4, 6, 26, 0.5); color: var(--mute); font: 600 12px system-ui, sans-serif; cursor: pointer; }
+  .scene-tab:hover { border-color: var(--lime); color: var(--ink); }
+  .scene-tab.on { border-color: var(--lime); color: var(--ink); background: rgba(199, 242, 58, 0.1); }
+  @media (max-width: 560px) { .gates { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 </style>
 </head>
 <body>
@@ -109,8 +188,11 @@
         <input id="addr" name="addr" type="text" inputmode="text" spellcheck="false" placeholder="0x0000000000000000000000000000000000000000" aria-label="EVM address">
       </div>
       <div>
-        <label for="chain">Chain the funds landed on</label>
-        <select id="chain" name="chain" aria-label="Destination chain"></select>
+        <label id="chain-label" for="pick-btn">Chain the funds landed on</label>
+        <div class="pick">
+          <button type="button" class="pick-btn" id="pick-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="chain-label pick-name"><img id="chain-logo" class="lg" src="logos/ethereum.svg" alt="" width="24" height="24"><span id="pick-name">Pick a chain</span><span class="chev" aria-hidden="true">▾</span></button>
+          <select id="chain" name="chain" aria-label="Destination chain" hidden></select>
+        </div>
       </div>
     </div>
     <button id="go" type="submit">Check recovery</button>
@@ -127,11 +209,30 @@
   </section>
 
   <div id="result" aria-live="polite"></div>
+
+  <section class="scene" aria-labelledby="scene-h">
+    <div class="scene-head">
+      <div>
+        <h2 id="scene-h">Four real addresses. <span class="hl">Four honest answers.</span></h2>
+        <p class="mute">Examples, not a live check — this is what each one would get. Pick one, or watch them cycle.</p>
+      </div>
+      <button type="button" class="scene-toggle" id="scene-toggle" aria-pressed="false">Pause</button>
+    </div>
+    <ul class="gates" id="gates" aria-hidden="true"></ul>
+    <div class="readout" id="readout" aria-live="off"></div>
+    <div class="scene-tabs" id="scene-tabs" role="tablist" aria-label="Example addresses"></div>
+  </section>
+
+  <section class="reads" aria-labelledby="reads-h">
+    <h2 class="rows-h" id="reads-h">The chains we read</h2>
+    <p class="mute rows-note">Read live, all at once — every check asks all of these about your address.</p>
+    <ul class="chainrow" id="chainrow"></ul>
+  </section>
 </main>
 <footer>
   <p><b>What leaves your browser:</b> to read the address, your browser asks each chain's public RPC service about it, so those services can see the address and your IP. The Abstract wallet archive is downloaded in small pieces. Nothing else leaves your browser — no account, no tracking, no cookies, nothing stored.</p>
   <p>We never ask for a seed phrase, private key or OTP, and would refuse one if pasted. We hold no funds and never deploy or sign anything — any deployment you attempt, you do yourself, at your own risk.</p>
-  <p>Built on the Safe to Send engine. Brand names shown to identify services; names/logos belong to their owners. MIT licensed.</p>
+  <p>Built on the Safe to Send engine. Chain logos from <a href="https://github.com/0xa3k5/web3icons" rel="noreferrer">web3icons</a> (MIT); brand names shown to identify services; names/logos belong to their owners. MIT licensed.</p>
 </footer>
 <script type="module" src="src/page.js"></script>
 </body>
