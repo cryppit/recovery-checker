@@ -3,6 +3,18 @@
 import { CHAINS, chainName } from "./chains.js";
 import { lookup } from "./lookup.js";
 
+// Abstract Global Wallet archive: one small (~150 KB) shard per address prefix, fetched on demand from Safe to Send's
+// already-hosted copy on the SAME origin (cryppit.github.io). This keeps AGW detection working after Abstract shuts
+// down on 15 Dec 2026, with no 111 MB copy here. CSP connect-src 'self' already allows it.
+const loadShard = async (key) => {
+  try {
+    const r = await fetch(`/safe-to-send/data/abstract/agw/${key}.bin`);
+    return r.ok ? new Uint8Array(await r.arrayBuffer()) : null;
+  } catch {
+    return null;
+  }
+};
+
 const $ = (sel, root = document) => root.querySelector(sel);
 const el = (tag, props = {}, kids = []) => {
   const n = document.createElement(tag);
@@ -92,7 +104,7 @@ function init() {
     result.textContent = "";
     result.appendChild(el("p", { class: "loading", text: `Reading ${CHAINS.length} chains for ${address}…` }));
     try {
-      const res = await lookup(address, target);
+      const res = await lookup(address, target, { loadShard });
       renderResult(result, address, target, res);
     } catch (err) {
       result.textContent = "";
