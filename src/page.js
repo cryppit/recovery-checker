@@ -53,7 +53,7 @@ function mountChainPicker(select) {
     button: $("#pick-btn"),
     name: $("#pick-name"),
     logo: $("#chain-logo"),
-    groups: [{ label: "Chains read live", note: "33 EVM chains", items: CHAINS }],
+    groups: [{ label: "Chains read live", note: "34 EVM chains", items: CHAINS }],
     popular: [1, 8453, 42161, 10, 137, 56], // Ethereum, Base, Arbitrum, OP, Polygon, BNB
     kindOf: () => "EVM",
     onPick: () => picker.sync(),
@@ -170,7 +170,7 @@ function init() {
   renderChainrow($("#chainrow"));
   mountTabs();
 
-  // One real check: it reads the 33 chains, renders the result card, and mirrors the run in the wheel. Shared by the
+  // One real check: it reads the 34 chains, renders the result card, and mirrors the run in the wheel. Shared by the
   // form and by the wheel's "See the full answer →", so there is only ever one network run per check.
   const runCheck = async (address, target) => {
     btn.disabled = true;

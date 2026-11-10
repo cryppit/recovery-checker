@@ -21,6 +21,7 @@ export const CHAINS = [
   { id: 5000, name: "Mantle", logo: "mantle", rpcs: ["https://rpc.mantle.xyz", "https://mantle-rpc.publicnode.com"], explorer: "https://mantlescan.xyz/address/" },
   { id: 81457, name: "Blast", logo: "blast", rpcs: ["https://rpc.blast.io", "https://blast-rpc.publicnode.com"], explorer: "https://blastscan.io/address/" },
   { id: 2818, name: "Morph", logo: "morph", rpcs: ["https://rpc-bgw.morph.network", "https://rpc-quicknode.morph.network"], explorer: "https://explorer.morph.network/address/" },
+  { id: 1101, name: "Polygon zkEVM", logo: "polygonzkevm", rpcs: ["https://zkevm-rpc.com"], explorer: "https://zkevm.polygonscan.com/address/" },
   { id: 80094, name: "Berachain", logo: "berachain", rpcs: ["https://rpc.berachain.com", "https://berachain-rpc.publicnode.com"], explorer: "https://berascan.com/address/" },
   { id: 999, name: "HyperEVM", logo: "hyper-evm", rpcs: ["https://rpc.hyperliquid.xyz/evm"], explorer: "https://hyperevmscan.io/address/" },
   { id: 57073, name: "Ink", logo: "ink", rpcs: ["https://rpc-gel.inkonchain.com", "https://ink-rpc.publicnode.com"], explorer: "https://explorer.inkonchain.com/address/" },

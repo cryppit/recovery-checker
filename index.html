@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <!-- The page may talk only to itself and the public EVM RPCs that src/chains.js reads. No keys leave the browser. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://andromeda.metis.io https://api.avax.network https://api.mainnet.abs.xyz https://arb1.arbitrum.io https://arbitrum-one-rpc.publicnode.com https://avalanche-c-chain-rpc.publicnode.com https://base-rpc.publicnode.com https://berachain-rpc.publicnode.com https://blast-rpc.publicnode.com https://bsc-dataseed.bnbchain.org https://bsc-rpc.publicnode.com https://celo-rpc.publicnode.com https://cronos-evm-rpc.publicnode.com https://ethereum-rpc.publicnode.com https://evm-rpc.sei-apis.com https://evm.cronos.org https://forno.celo.org https://gnosis-rpc.publicnode.com https://ink-rpc.publicnode.com https://linea-rpc.publicnode.com https://mainnet.base.org https://mainnet.era.zksync.io https://mainnet.mode.network https://mainnet.optimism.io https://mainnet.unichain.org https://mantle-rpc.publicnode.com https://metis-rpc.publicnode.com https://optimism-rpc.publicnode.com https://polygon-bor-rpc.publicnode.com https://polygon.gateway.tenderly.co https://rpc-bgw.morph.network https://rpc-gel.inkonchain.com https://rpc-quicknode.morph.network https://rpc.api.lisk.com https://rpc.berachain.com https://rpc.blast.io https://rpc.gnosischain.com https://rpc.hyperliquid.xyz https://rpc.katana.network https://rpc.linea.build https://rpc.mainnet.chain.robinhood.com https://rpc.mainnet.taiko.xyz https://rpc.mantle.xyz https://rpc.mevblocker.io https://rpc.monad.xyz https://rpc.plasma.to https://rpc.scroll.io https://rpc.soneium.org https://rpc.soniclabs.com https://rpc.zora.energy https://scroll-rpc.publicnode.com https://sei-evm-rpc.publicnode.com https://sonic-rpc.publicnode.com https://taiko-rpc.publicnode.com https://unichain-rpc.publicnode.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://andromeda.metis.io https://api.avax.network https://api.mainnet.abs.xyz https://arb1.arbitrum.io https://arbitrum-one-rpc.publicnode.com https://avalanche-c-chain-rpc.publicnode.com https://base-rpc.publicnode.com https://berachain-rpc.publicnode.com https://blast-rpc.publicnode.com https://bsc-dataseed.bnbchain.org https://bsc-rpc.publicnode.com https://celo-rpc.publicnode.com https://cronos-evm-rpc.publicnode.com https://ethereum-rpc.publicnode.com https://evm-rpc.sei-apis.com https://evm.cronos.org https://forno.celo.org https://gnosis-rpc.publicnode.com https://ink-rpc.publicnode.com https://linea-rpc.publicnode.com https://mainnet.base.org https://mainnet.era.zksync.io https://mainnet.mode.network https://mainnet.optimism.io https://mainnet.unichain.org https://mantle-rpc.publicnode.com https://metis-rpc.publicnode.com https://optimism-rpc.publicnode.com https://polygon-bor-rpc.publicnode.com https://polygon.gateway.tenderly.co https://rpc-bgw.morph.network https://rpc-gel.inkonchain.com https://rpc-quicknode.morph.network https://rpc.api.lisk.com https://rpc.berachain.com https://rpc.blast.io https://rpc.gnosischain.com https://rpc.hyperliquid.xyz https://rpc.katana.network https://rpc.linea.build https://rpc.mainnet.chain.robinhood.com https://rpc.mainnet.taiko.xyz https://rpc.mantle.xyz https://rpc.mevblocker.io https://rpc.monad.xyz https://rpc.plasma.to https://rpc.scroll.io https://rpc.soneium.org https://rpc.soniclabs.com https://rpc.zora.energy https://scroll-rpc.publicnode.com https://sei-evm-rpc.publicnode.com https://sonic-rpc.publicnode.com https://taiko-rpc.publicnode.com https://unichain-rpc.publicnode.com https://zkevm-rpc.com; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Recovery Checker</title>
@@ -417,7 +417,7 @@
         <p>Everything runs in your browser. Nothing is ever signed or deployed — reading a chain needs no key.</p>
         <ol class="flow">
           <li><span class="fi i-paste" aria-hidden="true"></span><b>1. Paste</b><span>the address and the chain the money landed on</span></li>
-          <li><span class="fi i-read" aria-hidden="true"></span><b>2. Read</b><span>the address on 33 EVM chains at once, read-only</span></li>
+          <li><span class="fi i-read" aria-hidden="true"></span><b>2. Read</b><span>the address on 34 EVM chains at once, read-only</span></li>
           <li><span class="fi i-find" aria-hidden="true"></span><b>3. Find</b><span>where it's a smart wallet, and what kind</span></li>
           <li><span class="fi i-verdict" aria-hidden="true"></span><b>4. Check</b><span>whether the destination already has code, and whether the Safe's factory is live there</span></li>
           <li><span class="fi i-answer" aria-hidden="true"></span><b>5. Answer</b><span>one honest verdict, with the reasons and any steps</span></li>
@@ -464,7 +464,7 @@
         <h2>What it can't tell you</h2>
         <ul class="plain">
           <li><b>It can't recover funds for you.</b> It reads chains and tells you the honest answer. Any deployment you attempt, you do yourself.</li>
-          <li><b>It reads only the 33 EVM chains listed below.</b> A smart wallet on a chain not in that list won't be found, and a destination not in the list can't be checked.</li>
+          <li><b>It reads only the 34 EVM chains listed below.</b> A smart wallet on a chain not in that list won't be found, and a destination not in the list can't be checked.</li>
           <li><b>A "Possibly recoverable" needs the exact original parameters.</b> Redeploying a Safe needs its precise factory, singleton, initializer and saltNonce to all exist and match on the destination. Without them, the address won't match.</li>
           <li><b>Unknown means unknown.</b> A brand-new wallet and an undeployed smart wallet look identical from the outside. We never turn that into a yes.</li>
           <li><b>It's true for the moment it was read.</b> Contracts, owners and factories can change; an answer is a snapshot.</li>
@@ -501,7 +501,7 @@
 
       <section class="esec" id="networks" aria-labelledby="networks-h">
         <h2 id="networks-h">Networks</h2>
-        <p>A check reads the address on 33 EVM chains, all at once, read-only. The full row is on the <a href="#top">Check</a> tab, under "The chains we read". A smart wallet or a destination on a chain outside that list can't be checked.</p>
+        <p>A check reads the address on 34 EVM chains, all at once, read-only. The full row is on the <a href="#top">Check</a> tab, under "The chains we read". A smart wallet or a destination on a chain outside that list can't be checked.</p>
       </section>
     </div>
   </div>
