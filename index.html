@@ -169,14 +169,87 @@
   .scene-tab:hover { border-color: var(--lime); color: var(--ink); }
   .scene-tab.on { border-color: var(--lime); color: var(--ink); background: rgba(199, 242, 58, 0.1); }
   @media (max-width: 560px) { .gates { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+  /* Two tabs: Check and Explained. Pattern + look from Safe to Send, retoned to this page's palette. */
+  .tabs { display: inline-flex; gap: 4px; margin-left: auto; padding: 4px; border: 1px solid var(--line); border-radius: 13px; background: rgba(4, 6, 26, 0.7); }
+  .tab { padding: 7px 16px; border-radius: 9px; color: var(--ink); text-decoration: none; font-weight: 650; font-size: 14.5px; opacity: 0.8; }
+  .tab:hover { opacity: 1; }
+  .tab[aria-current="page"] { background: var(--lime); color: #04061a; opacity: 1; }
+  header .gh { margin-left: 12px; }
+  @media (max-width: 560px) { header .gh { display: none; } .tabs { margin-left: auto; } .brand { font-size: 16px; } }
+
+  /* The Explained view: header, contents nav and sections (.esec, kept distinct from the result card's .sec). */
+  .ex-head { padding: 20px 0 8px; }
+  .eyebrow { font: 600 12px/1.2 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute); margin: 0; }
+  .ex-head h1 { margin: 6px 0 10px; font-size: clamp(28px, 5vw, 46px); line-height: 1.05; letter-spacing: -0.03em; }
+  .ex-head .lede { margin: 0; }
+  .ex-grid { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; margin-top: 18px; align-items: start; }
+  .toc { position: sticky; top: 74px; display: grid; gap: 2px; padding: 10px; border-radius: 16px; background: rgba(11, 16, 48, 0.5); border: 1px solid var(--line); }
+  .toc a { padding: 8px 12px; border-radius: 9px; color: var(--ink); text-decoration: none; font-size: 14.5px; opacity: 0.85; }
+  .toc a:hover { opacity: 1; background: rgba(199, 242, 58, 0.08); color: var(--lime); }
+  .ex-body { display: grid; gap: 20px; min-width: 0; }
+  .esec { padding: 22px; border-radius: 18px; background: rgba(11, 16, 48, 0.5); border: 1px solid var(--line); scroll-margin-top: 80px; min-width: 0; }
+  .esec h2 { margin: 0 0 10px; font-size: 24px; letter-spacing: -0.02em; }
+  .esec > p { margin: 0 0 10px; max-width: 76ch; color: #d9dcec; }
+  .esec > p:last-child { margin-bottom: 0; }
+  .plain { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; max-width: 80ch; }
+  .plain li { padding-left: 16px; border-left: 2px solid var(--line); color: #d9dcec; }
+  .plain b { color: var(--ink); }
+  .warn-box { margin: 16px 0 0 !important; padding: 14px 16px; border-radius: 14px; border: 1px solid rgba(242, 184, 74, 0.5); background: rgba(242, 184, 74, 0.08); max-width: none !important; color: #d9dcec; }
+
+  /* How a check works: five steps. Icons are same-origin data-URI masks (img-src 'self' data:). */
+  .flow { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+  .flow li { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; font-size: 13px; color: var(--mute); }
+  .flow b { color: var(--ink); font-size: 14.5px; margin-top: 6px; }
+  .flow li:not(:last-child)::after { content: ""; position: absolute; top: 30px; left: calc(50% + 38px); width: calc(100% - 64px); border-top: 2px dotted rgba(199, 242, 58, 0.5); }
+  .fi { flex: none; width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle, rgba(199, 242, 58, 0.12), rgba(4, 6, 26, 0.9) 70%); box-shadow: inset 0 0 0 2px var(--c, var(--lime)), 0 0 24px color-mix(in srgb, var(--c, var(--lime)) 45%, transparent); }
+  .fi::before { content: ""; width: 26px; height: 26px; background: var(--c, var(--lime)); -webkit-mask: var(--m) center / contain no-repeat; mask: var(--m) center / contain no-repeat; }
+  @media (max-width: 760px) { .flow { grid-template-columns: minmax(0, 1fr); } .flow li { flex-direction: row; text-align: left; align-items: center; } .flow li::after { display: none; } .flow b { margin: 0 6px 0 4px; white-space: nowrap; min-width: 84px; } }
+  .i-paste { --c: var(--unknown); --m: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='6' y='4' width='12' height='17' rx='2'/%3E%3Cpath d='M9 4V3h6v1M9 10h6M9 14h6' stroke-linecap='round'/%3E%3C/svg%3E"); }
+  .i-read { --c: var(--unknown); --m: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linejoin='round'%3E%3Cpath d='M12 3l9 5-9 5-9-5z'/%3E%3Cpath d='M3 12.5l9 5 9-5M3 16.5l9 5 9-5'/%3E%3C/svg%3E"); }
+  .i-find { --c: var(--warn); --m: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-4-4' stroke-linecap='round'/%3E%3C/svg%3E"); }
+  .i-verdict { --c: var(--yes); --m: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linejoin='round'%3E%3Cpath d='M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z'/%3E%3Cpath d='M12 8v5M12 16h.01' stroke-linecap='round'/%3E%3C/svg%3E"); }
+  .i-answer { --c: var(--lime); --m: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linejoin='round'%3E%3Cpath d='M4 5h16v11H8l-4 4z'/%3E%3Cpath d='M9 10h6' stroke-linecap='round'/%3E%3C/svg%3E"); }
+
+  /* The answers. */
+  .answers { list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+  .ans { display: flex; flex-direction: column; gap: 6px; padding: 14px; border-radius: 14px; border: 1px solid var(--line); border-top: 3px solid var(--c); background: rgba(4, 6, 26, 0.55); font-size: 14px; color: #c9cde6; min-width: 0; }
+  .ans b { display: inline-flex; align-items: center; gap: 8px; font-size: 16px; color: var(--c); }
+  .ans p { margin: 0; }
+  .ans .do { margin-top: auto; padding-top: 8px; color: var(--ink); font-weight: 600; }
+  .ans.a-yes { --c: var(--yes); } .ans.a-danger { --c: var(--danger); } .ans.a-no { --c: #9aa0c8; } .ans.a-unknown { --c: var(--unknown); } .ans.a-na { --c: var(--mute); }
+  @media (max-width: 1180px) { .answers { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 760px) { .answers { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 520px) { .answers { grid-template-columns: minmax(0, 1fr); } }
+
+  /* What decides recovery: feature cards. */
+  .features { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
+  @media (max-width: 1180px) { .features { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .features { grid-template-columns: minmax(0, 1fr); } }
+  .feat { padding: 18px; border-radius: 16px; background: rgba(4, 6, 26, 0.55); border: 1px solid var(--line); }
+  .feat h3 { font-size: 17px; margin: 12px 0 6px; line-height: 1.2; color: var(--c, var(--ink)); }
+  .feat p { color: #c9cde6; font-size: 14px; margin: 0; }
+  .fx { width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; color: var(--c); font: 800 20px system-ui, sans-serif; background: rgba(4, 6, 26, 0.7); box-shadow: inset 0 0 0 2px var(--c), 0 0 24px color-mix(in srgb, var(--c) 38%, transparent); }
+  .feat.rec { --c: var(--yes); } .feat.occ { --c: var(--danger); } .feat.lost { --c: #9aa0c8; } .feat.rule { --c: var(--lime); } .feat.unk { --c: var(--unknown); }
+
+  /* Glossary. */
+  .words { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; }
+  .words div { min-width: 0; }
+  .words dt { font-weight: 700; }
+  .words dd { margin: 2px 0 0; color: var(--mute); font-size: 14.5px; }
+  @media (max-width: 520px) { .words { grid-template-columns: minmax(0, 1fr); } }
+
+  @media (max-width: 860px) { .ex-grid { grid-template-columns: minmax(0, 1fr); } .toc { position: static; display: flex; flex-wrap: wrap; gap: 4px; } .toc a { padding: 6px 10px; font-size: 13.5px; } .esec { padding: 18px; } }
 </style>
 </head>
 <body>
 <header>
-  <a class="brand" href="/">Crypp<b>it</b> · Recovery Checker</a>
+  <a class="brand" href="#top">Crypp<b>it</b> · Recovery Checker</a>
+  <span class="tabs"><a class="tab" id="tab-check" href="#top">Check</a><a class="tab" id="tab-explained" href="#explained">Explained</a></span>
   <a class="gh" href="https://github.com/cryppit" rel="noreferrer">Source</a>
 </header>
-<main>
+<main id="top">
+<div id="view-check">
   <h1>Did you send to a smart wallet on the wrong chain?</h1>
   <p class="lede">Paste the address and pick the chain the money landed on. We read the chains and tell you the honest answer: whether it can be recovered, and the risky steps if it can. Some losses — like Abstract Global Wallets — usually can't be recovered, and we say so.</p>
   <span class="stamp" title="We hold no keys, sign nothing, and never deploy.">Keyless · read-only · we never deploy or sign</span>
@@ -228,6 +301,129 @@
     <p class="mute rows-note">Read live, all at once — every check asks all of these about your address.</p>
     <ul class="chainrow" id="chainrow"></ul>
   </section>
+</div><!-- /#view-check -->
+
+<div id="view-explained" hidden>
+  <header class="ex-head" id="explained">
+    <p class="eyebrow">Explained</p>
+    <h1>How recovery really works</h1>
+    <p class="lede">The Recovery Checker answers one question, honestly: you sent money to an address that is a smart wallet somewhere, but on the chain it landed on that address is empty — can it be reached? Here is what decides that, in plain words. No sign-up, no wallet to connect, no keys.</p>
+  </header>
+
+  <div class="ex-grid">
+    <nav class="toc" aria-label="On this page">
+      <a href="#idea">The idea</a>
+      <a href="#how">How a check works</a>
+      <a href="#answers">The answers</a>
+      <a href="#decides">What decides recovery</a>
+      <a href="#scams">Recovery scams</a>
+      <a href="#limits">What it can't tell you</a>
+      <a href="#privacy">Your privacy</a>
+      <a href="#words">Words you'll see</a>
+      <a href="#networks">Networks</a>
+    </nav>
+
+    <div class="ex-body">
+      <section class="esec" id="idea">
+        <h2>The idea</h2>
+        <p>An address is like a house number, and a chain is like a city. The same number can exist in many cities. In one it's your smart wallet — a Safe, or an account-abstraction wallet. In another the same address is an empty plot: no code, no owner, nobody home.</p>
+        <p>If you sent funds to a smart-wallet address on a chain where that address is empty, your wallet can't see the problem — it only checks the address looks valid. This tool looks at what is really at that address on the chain you picked, and on the others, then tells you honestly whether the money can be reached, and the risky steps if it can. Some losses — Abstract Global Wallets especially — usually can't be recovered, and we say so.</p>
+      </section>
+
+      <section class="esec" id="how">
+        <h2>How a check works</h2>
+        <p>Everything runs in your browser. Nothing is ever signed or deployed — reading a chain needs no key.</p>
+        <ol class="flow">
+          <li><span class="fi i-paste" aria-hidden="true"></span><b>1. Paste</b><span>the address and the chain the money landed on</span></li>
+          <li><span class="fi i-read" aria-hidden="true"></span><b>2. Read</b><span>the address on 32 EVM chains at once, read-only</span></li>
+          <li><span class="fi i-find" aria-hidden="true"></span><b>3. Find</b><span>where it's a smart wallet, and what kind</span></li>
+          <li><span class="fi i-verdict" aria-hidden="true"></span><b>4. Check</b><span>whether the destination already has code, and whether the Safe's factory is live there</span></li>
+          <li><span class="fi i-answer" aria-hidden="true"></span><b>5. Answer</b><span>one honest verdict, with the reasons and any steps</span></li>
+        </ol>
+      </section>
+
+      <section class="esec" id="answers">
+        <h2>The answers</h2>
+        <p>Every check ends in one of these. Colour is always paired with a mark and a word.</p>
+        <ul class="answers">
+          <li class="ans a-yes"><b><span aria-hidden="true">⚠</span> Possibly recoverable</b><p>A modern CREATE2 Safe that lives on another chain, with its factory live on the destination. The owner may be able to redeploy the identical Safe at the address.</p><p class="do">Read every step and warning first. It carries a deploy-race risk; you act, we never do.</p></li>
+          <li class="ans a-danger"><b><span aria-hidden="true">⚑</span> Occupied</b><p>Something already has code at this address on the destination chain. Whoever controls that contract controls what's there — it could be an attacker.</p><p class="do">Don't send more until you've verified the owners are yours.</p></li>
+          <li class="ans a-no"><b><span aria-hidden="true">✗</span> Very likely unrecoverable</b><p>An Abstract Global Wallet, a zkSync-stack destination, or an old create-opcode Safe. The identical wallet can't be reproduced at this address.</p><p class="do">Treat the funds as gone. Beware anyone who says otherwise.</p></li>
+          <li class="ans a-unknown"><b><span aria-hidden="true">?</span> Unknown</b><p>A smart wallet we can't classify, a Safe version we couldn't read, a factory we can't confirm, or an address never used anywhere. Unproven is not a yes.</p><p class="do">Get expert review, or send a small test first — never assume recovery.</p></li>
+          <li class="ans a-na"><b><span aria-hidden="true">•</span> Not a smart-wallet case</b><p>A regular key-controlled address, not a smart wallet. If you hold its private key, funds on that chain are already yours to move.</p><p class="do">This tool is for smart-wallet-on-the-wrong-chain losses, which this isn't.</p></li>
+        </ul>
+      </section>
+
+      <section class="esec" id="decides">
+        <h2>What decides recovery</h2>
+        <p>Whether a smart wallet can be reproduced at the same address on another chain comes down to a few exact facts. This is the heart of it.</p>
+        <div class="features">
+          <article class="feat unk"><span class="fx" aria-hidden="true">◆</span><h3>A smart wallet lives where it was deployed</h3><p>A smart wallet is a contract, not a key. It exists only on the chain where it was created. On any other chain the same address has no code and nobody behind it — until, for some kinds, it can be created there too.</p></article>
+          <article class="feat rule"><span class="fx" aria-hidden="true">≡</span><h3>A Safe's address repeats only if everything matches</h3><p>The same Safe address appears on another chain only when the factory, the singleton (mastercopy), the initializer (owners, threshold, fallback handler) and the salt (saltNonce) — and the proxy creation code — all match. Change any one, and it's a different address.</p></article>
+          <article class="feat rec"><span class="fx" aria-hidden="true">⚠</span><h3>Modern CREATE2 Safes — a deploy race</h3><p>Safe v1.3.0 and v1.4.1 use CREATE2. If the matching SafeProxyFactory is live on the destination chain and you still have the original owners and saltNonce, the owner can redeploy the identical Safe at the address. But whoever deploys first wins — this is the 2022 Wintermute/Optimism theft of 20M OP. jonluca/safe-everywhere automates this for opted-in Safes; it excludes zkSync.</p></article>
+          <article class="feat lost"><span class="fx" aria-hidden="true">✗</span><h3>Old create-opcode Safes can't be re-made by the owner</h3><p>Safe v1.0.0 and v1.1.1 got their address from create(deployer, nonce). The legitimate owner can't reproduce the original deployer's nonce on a new chain, so they can't redeploy there. Only an attacker replaying the old factory could — which is exactly what happened to Wintermute.</p></article>
+          <article class="feat lost"><span class="fx" aria-hidden="true">✗</span><h3>Abstract / zkSync Era wallets can't follow</h3><p>Abstract Global Wallets and zkSync Era derive addresses with EraVM's own formula (a different create2 and a split nonce). The same bytecode and salt do not yield the same address on an ordinary EVM chain, so the wallet can't be re-created at that address. A zkSync-stack destination has the same problem in reverse.</p></article>
+          <article class="feat occ"><span class="fx" aria-hidden="true">⚑</span><h3>If the destination is already occupied</h3><p>If code already exists at the address on the destination chain, funds there are controlled by whoever owns that contract — possibly an attacker who got there first. Verify the owners are yours before trusting it.</p></article>
+        </div>
+      </section>
+
+      <section class="esec" id="scams">
+        <h2>Recovery scams</h2>
+        <p>Losing funds this way is stressful, and that makes people targets. Be plain with yourself about this:</p>
+        <ul class="plain">
+          <li><b>Nobody can "recover" an Abstract Global Wallet</b> sent to another chain. If someone offers to, for a fee or otherwise, they are lying.</li>
+          <li><b>We never ask for a seed phrase, private key or one-time code,</b> and we would refuse one if you pasted it. Anyone who asks is trying to steal from you.</li>
+          <li><b>We never deploy or sign anything.</b> If a verdict is "Possibly recoverable", the steps are yours to take, at your own risk — not a service we sell.</li>
+          <li><b>Ignore unsolicited messages</b> promising to get your money back. Real recovery, where it exists at all, is the steps shown here, done by you.</li>
+        </ul>
+      </section>
+
+      <section class="esec" id="limits">
+        <h2>What it can't tell you</h2>
+        <ul class="plain">
+          <li><b>It can't recover funds for you.</b> It reads chains and tells you the honest answer. Any deployment you attempt, you do yourself.</li>
+          <li><b>It reads only the 32 EVM chains listed below.</b> A smart wallet on a chain not in that list won't be found, and a destination not in the list can't be checked.</li>
+          <li><b>A "Possibly recoverable" needs the exact original parameters.</b> Redeploying a Safe needs its precise factory, singleton, initializer and saltNonce to all exist and match on the destination. Without them, the address won't match.</li>
+          <li><b>Unknown means unknown.</b> A brand-new wallet and an undeployed smart wallet look identical from the outside. We never turn that into a yes.</li>
+          <li><b>It's true for the moment it was read.</b> Contracts, owners and factories can change; an answer is a snapshot.</li>
+          <li><b>It isn't a scam check.</b> It tells you whether funds can be reached, not whether a person is honest.</li>
+        </ul>
+      </section>
+
+      <section class="esec" id="privacy">
+        <h2>Your privacy — what leaves your browser</h2>
+        <ul class="plain">
+          <li><b>No account, no tracking.</b> There's no sign-up, analytics or cookies, and nothing is saved in your browser.</li>
+          <li><b>No Cryppit server.</b> Your browser does the work. The page itself blocks every connection except the public services below.</li>
+          <li><b>The chains see the address.</b> To read it, your browser asks each chain's public RPC service about the address, so those services can see the address and your IP address.</li>
+          <li><b>The Abstract archive is fetched in small pieces.</b> One small shard per address prefix is downloaded on demand to spot Abstract Global Wallets after Abstract shuts down; it reveals only which prefix you looked at.</li>
+          <li><b>Nothing else leaves your browser.</b> No keys, ever. We never ask for a seed phrase or private key, and would refuse one if pasted.</li>
+        </ul>
+      </section>
+
+      <section class="esec" id="words">
+        <h2>Words you'll see</h2>
+        <dl class="words">
+          <div><dt>Smart wallet</dt><dd>A wallet that's a contract, so it only exists on chains where it was deployed.</dd></div>
+          <div><dt>Safe</dt><dd>A popular smart wallet shared by several owners. "3-of-5" means 3 of its 5 owners must approve.</dd></div>
+          <div><dt>Factory</dt><dd>The contract that deploys a Safe. The same Safe address can only be made on a chain where its factory is live.</dd></div>
+          <div><dt>Singleton (mastercopy)</dt><dd>The shared Safe logic every Safe proxy points to. Reading storage slot 0 gives it, which tells us the Safe's version.</dd></div>
+          <div><dt>CREATE2</dt><dd>A way of making a contract's address from the factory, the code and a salt — so it can be the same on another chain, if all of those match.</dd></div>
+          <div><dt>create opcode</dt><dd>The older way, where the address came from the deployer and its nonce. The owner can't reproduce that nonce on a new chain.</dd></div>
+          <div><dt>saltNonce / initializer</dt><dd>The salt and the setup (owners, threshold, fallback) baked into a CREATE2 Safe's address. Both must match to land at the same address.</dd></div>
+          <div><dt>Abstract Global Wallet / EraVM</dt><dd>An account-abstraction wallet on Abstract/zkSync. EraVM derives addresses differently, so it can't be re-made on an ordinary EVM chain.</dd></div>
+          <div><dt>Deploy race</dt><dd>When a Safe can be redeployed at an address, whoever deploys first controls it. The risk behind "Possibly recoverable".</dd></div>
+          <div><dt>Occupied address</dt><dd>An address that already has contract code on the destination chain — controlled by whoever owns that contract.</dd></div>
+        </dl>
+      </section>
+
+      <section class="esec" id="networks" aria-labelledby="networks-h">
+        <h2 id="networks-h">Networks</h2>
+        <p>A check reads the address on 32 EVM chains, all at once, read-only. The full row is on the <a href="#top">Check</a> tab, under "The chains we read". A smart wallet or a destination on a chain outside that list can't be checked.</p>
+      </section>
+    </div>
+  </div>
+</div><!-- /#view-explained -->
 </main>
 <footer>
   <p><b>What leaves your browser:</b> to read the address, your browser asks each chain's public RPC service about it, so those services can see the address and your IP. The Abstract wallet archive is downloaded in small pieces. Nothing else leaves your browser — no account, no tracking, no cookies, nothing stored.</p>

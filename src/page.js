@@ -156,6 +156,27 @@ function mountSceneFlow() {
   setPaused(still);
 }
 
+// Two tabs: Check and Explained, driven by the hash. Any link into the guide opens Explained; everything else, Check.
+function mountTabs() {
+  const vExp = $("#view-explained"), vChk = $("#view-check");
+  const tExp = $("#tab-explained"), tChk = $("#tab-check");
+  if (!vExp || !vChk || !tExp || !tChk) return;
+  const guide = new Set(["explained", ...[...vExp.querySelectorAll("[id]")].map((e) => e.id)]);
+  const showTab = () => {
+    const hash = location.hash.slice(1);
+    const explained = guide.has(hash);
+    vExp.hidden = !explained;
+    vChk.hidden = explained;
+    tExp.toggleAttribute("aria-current", false);
+    tChk.toggleAttribute("aria-current", false);
+    (explained ? tExp : tChk).setAttribute("aria-current", "page");
+    if (explained && hash !== "explained") document.getElementById(hash)?.scrollIntoView();
+    else window.scrollTo(0, 0);
+  };
+  window.addEventListener("hashchange", showTab);
+  showTab();
+}
+
 function renderResult(root, address, target, res) {
   root.textContent = "";
   if (res.error) {
@@ -214,6 +235,7 @@ function init() {
   mountChainPicker(chain);
   renderChainrow($("#chainrow"));
   mountSceneFlow();
+  mountTabs();
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
