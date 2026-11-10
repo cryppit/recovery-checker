@@ -9,6 +9,9 @@
 <title>Recovery Checker</title>
 <meta name="description" content="Sent money to a smart-wallet address on the wrong chain? Paste the address and the chain it landed on: see whether it can be recovered, and the risky steps if it can. Keyless, read-only. We never deploy or sign.">
 <meta name="theme-color" content="#04061a">
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <style>
   :root {
     --bg: #04061a; --panel: #0b1030; --ink: #eef1ff; --mute: #8c93c0; --line: #1b2250; --lime: #c7f23a;
@@ -23,7 +26,8 @@
   .mute { color: var(--mute); }
 
   header { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 14px; padding: 14px 16px; background: linear-gradient(var(--bg) 70%, rgba(4, 6, 26, 0)); max-width: 1080px; margin: 0 auto; }
-  .brand { font-weight: 800; font-size: 19px; letter-spacing: -0.01em; color: var(--ink); text-decoration: none; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 19px; letter-spacing: -0.01em; color: var(--ink); text-decoration: none; }
+  .brand img { display: block; }
   .brand b { color: var(--lime); font-weight: 800; }
   .gh { margin-left: auto; border: 1px solid var(--line); border-radius: 12px; padding: 8px 14px; color: var(--ink); text-decoration: none; font-size: 14px; }
   .gh:hover { border-color: var(--lime); }
@@ -244,7 +248,7 @@
 </head>
 <body>
 <header>
-  <a class="brand" href="#top">Crypp<b>it</b> · Recovery Checker</a>
+  <a class="brand" href="#top"><img src="icons/favicon.svg" alt="" width="26" height="26"><span>Crypp<b>it</b> · Recovery Checker</span></a>
   <span class="tabs"><a class="tab" id="tab-check" href="#top">Check</a><a class="tab" id="tab-explained" href="#explained">Explained</a></span>
   <a class="gh" href="https://github.com/cryppit" rel="noreferrer">Source</a>
 </header>
