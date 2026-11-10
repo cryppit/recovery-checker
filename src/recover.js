@@ -24,9 +24,23 @@ import { safeModel, ZK_STACK_CHAINS } from "./safe.js";
 
 const WINTERMUTE = "this is how the 2022 Wintermute/Optimism 20M OP theft happened: a stranger redeployed a Safe at the victim's CREATE2 address first and took the funds.";
 
+// Who acts next (design standards §5): every result names the party and the one next step, keyed by verdict class.
+const WHO = {
+  occupied: "Who acts next: You — verify who controls the contract already at this address before sending anything else here.",
+  "agw-not-recoverable": "Who acts next: Nobody — these funds can't be recovered. Don't pay anyone who claims otherwise.",
+  "safe-zk-destination": "Who acts next: Nobody — a standard Safe can't be reproduced on a zkSync-stack chain. Don't pay anyone who claims otherwise.",
+  "safe-redeploy": "Who acts next: You — only if you hold the Safe's original owners, threshold and saltNonce, carefully and at your own risk, following the steps above.",
+  "safe-no-factory": "Who acts next: An expert — recovery is unproven here and needs specialist review before anyone acts.",
+  "safe-legacy-create": "Who acts next: Likely nobody — a legacy Safe isn't owner-recoverable. Get expert review before trusting any recovery offer.",
+  "safe-unknown-version": "Who acts next: An expert — we couldn't read the Safe's version, so it needs specialist review.",
+  "smart-wallet-unknown": "Who acts next: An expert who knows how this wallet was originally deployed.",
+  "not-smart-wallet": "Who acts next: You — if you hold this address's private key, the funds are already yours to move.",
+  unused: "Who acts next: Nobody — there is no smart-wallet recovery case here.",
+};
+
 export function recover(facts) {
   const sources = Object.keys(facts.chains).map(Number);
-  const out = (v) => ({ steps: [], warnings: [], sources, ...v });
+  const out = (v) => ({ steps: [], warnings: [], sources, whoActsNext: WHO[v.class] ?? "", ...v });
 
   const target = facts.target;
   const dest = facts.chains[target];

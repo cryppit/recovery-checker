@@ -172,7 +172,8 @@ test("every verdict carries the required shape and a valid recoverable value", a
   const cases = [safeFacts("v1.4.1", true), safeFacts("v1.1.1"), await factsFor("agw-on-bnb"), await factsFor("usdc-contract-on-ethereum"), await factsFor("unused-on-bnb")];
   for (const f of cases) {
     const r = recover(f);
-    for (const k of ["class", "recoverable", "title", "headline", "steps", "warnings", "sources"]) assert.ok(k in r, `missing ${k}`);
+    for (const k of ["class", "recoverable", "title", "headline", "steps", "warnings", "sources", "whoActsNext"]) assert.ok(k in r, `missing ${k}`);
+    assert.ok(typeof r.whoActsNext === "string" && r.whoActsNext.length > 0, "every verdict must name who acts next");
     assert.ok(["yes-with-risk", "likely-no", "danger", "unknown", "not-applicable"].includes(r.recoverable), `bad recoverable ${r.recoverable}`);
     assert.ok(Array.isArray(r.steps) && Array.isArray(r.warnings) && Array.isArray(r.sources));
     assert.ok(typeof r.title === "string" && typeof r.headline === "string");

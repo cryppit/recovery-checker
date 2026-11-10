@@ -86,6 +86,10 @@
   .chip.tone-danger { background: rgba(242, 184, 74, 0.14); color: var(--danger); border-color: rgba(242, 184, 74, 0.55); }
   .chip.tone-unknown { background: rgba(140, 147, 192, 0.14); color: var(--unknown); border-color: var(--unknown); }
   @media (max-width: 560px) { .legend-list li { font-size: 13px; } }
+
+  .who { margin: 18px 0 2px; padding: 11px 14px; border: 1px solid var(--line); border-left: 3px solid var(--lime); border-radius: 10px; background: rgba(199, 242, 58, 0.05); font-weight: 600; font-size: 15px; color: var(--ink); }
+  .gh, button, .chip { transition: border-color 150ms ease, background-color 150ms ease, opacity 150ms ease; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 </head>
 <body>
@@ -125,7 +129,8 @@
   <div id="result" aria-live="polite"></div>
 </main>
 <footer>
-  <p>We never ask for a seed phrase, private key or OTP, and would refuse one if pasted. We read public chains only, hold no funds, and never deploy or sign anything — any deployment you attempt, you do yourself, at your own risk.</p>
+  <p><b>What leaves your browser:</b> to read the address, your browser asks each chain's public RPC service about it, so those services can see the address and your IP. The Abstract wallet archive is downloaded in small pieces. Nothing else leaves your browser — no account, no tracking, no cookies, nothing stored.</p>
+  <p>We never ask for a seed phrase, private key or OTP, and would refuse one if pasted. We hold no funds and never deploy or sign anything — any deployment you attempt, you do yourself, at your own risk.</p>
   <p>Built on the Safe to Send engine. Brand names shown to identify services; names/logos belong to their owners. MIT licensed.</p>
 </footer>
 <script type="module" src="src/page.js"></script>

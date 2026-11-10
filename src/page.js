@@ -77,6 +77,9 @@ function renderResult(root, address, target, res) {
     card.appendChild(ul);
   }
 
+  // Who acts next — the result ends naming the party and the one next step (design standards §5).
+  if (v.whoActsNext) card.appendChild(el("p", { class: "who", text: v.whoActsNext }));
+
   // What we checked.
   const read = v.sources.map((id) => chainName(id)).join(", ");
   card.appendChild(el("p", { class: "sources", text: `Destination: ${chainName(target)}. Sources — chains read (${v.sources.length}): ${read}.` }));
