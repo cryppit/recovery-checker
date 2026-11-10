@@ -73,6 +73,19 @@
 
   footer { max-width: 1080px; margin: 0 auto; padding: 0 16px 48px; color: var(--mute); font-size: 13px; }
   footer p { margin: 6px 0; }
+
+  body { background-image: radial-gradient(900px 520px at 85% -8%, rgba(199, 242, 58, 0.06), transparent 60%); background-repeat: no-repeat; background-attachment: fixed; }
+
+  .legend { margin-top: 18px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(180deg, rgba(11, 16, 48, 0.55), rgba(11, 16, 48, 0.25)); }
+  .legend-h { font: 700 12px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); margin: 0 0 12px; }
+  .legend-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .legend-list li { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 14px; color: #d9dcec; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; padding: 5px 11px; border-radius: 999px; font-weight: 700; font-size: 13px; border: 1px solid var(--line); white-space: nowrap; }
+  .chip.tone-yes { background: rgba(54, 208, 122, 0.12); color: var(--yes); border-color: rgba(54, 208, 122, 0.5); }
+  .chip.tone-no { background: rgba(90, 96, 140, 0.18); color: #c3c8e6; border-color: var(--no); }
+  .chip.tone-danger { background: rgba(242, 184, 74, 0.14); color: var(--danger); border-color: rgba(242, 184, 74, 0.55); }
+  .chip.tone-unknown { background: rgba(140, 147, 192, 0.14); color: var(--unknown); border-color: var(--unknown); }
+  @media (max-width: 560px) { .legend-list li { font-size: 13px; } }
 </style>
 </head>
 <body>
@@ -98,6 +111,16 @@
     </div>
     <button id="go" type="submit">Check recovery</button>
   </form>
+
+  <section class="legend" aria-label="What the answer can be">
+    <h2 class="legend-h">What the answer can be</h2>
+    <ul class="legend-list">
+      <li><span class="chip tone-yes">⚠ Possibly recoverable</span> a real path exists, with a deploy-race risk — we give the exact steps</li>
+      <li><span class="chip tone-danger">⚑ Occupied</span> an address already has code there — verify who controls it</li>
+      <li><span class="chip tone-no">✗ Very likely unrecoverable</span> e.g. an Abstract Global Wallet — we say so plainly</li>
+      <li><span class="chip tone-unknown">? Unknown</span> we can't confirm it — never a guess, never false hope</li>
+    </ul>
+  </section>
 
   <div id="result" aria-live="polite"></div>
 </main>
