@@ -42,7 +42,11 @@ export const GATES = [
   { level: "danger", mark: "⚑", tone: "danger", name: "Occupied", note: "Verify who controls it" },
   { level: "likely-no", mark: "✗", tone: "no", name: "Very likely unrecoverable", note: "Be wary of recovery offers" },
   { level: "unknown", mark: "?", tone: "unknown", name: "Unknown", note: "Send a small test" },
+  { level: "not-applicable", mark: "•", tone: "unknown", name: "Not a smart wallet", note: "A key address, already yours" },
 ];
+
+// Every verdict level recover() / page.js can emit. The wheel renders a gate per level, so each must have a GATE above.
+export const LEVELS = ["yes-with-risk", "danger", "likely-no", "unknown", "not-applicable"];
 
 /** The gate (answer) a verdict level belongs to, or undefined if none. Pure. */
 export const gateFor = (level) => GATES.find((g) => g.level === level);

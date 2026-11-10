@@ -3,7 +3,7 @@
 import { CHAINS, chainName, chainById } from "./chains.js";
 import { lookup } from "./lookup.js";
 import { mountPicker } from "./picker.js";
-import { SCENES, GATES, gateFor } from "./scenes.js";
+import { mountFlow } from "./flow.js";
 
 const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const logoSrc = (name) => `logos/${name}.svg`;
@@ -59,6 +59,7 @@ function mountChainPicker(select) {
     onPick: () => picker.sync(),
   });
   picker.sync();
+  return picker;
 }
 
 // The wheel of blockchains: every chain a check reads, shown as coverage. Logos are same-origin SVGs (img-src 'self').
@@ -88,73 +89,6 @@ function renderChainrow(root) {
   }
 }
 
-// The animated example flow: four real addresses, each cross-fading to the recovery answer it really gets.
-function mountSceneFlow() {
-  const gatesRoot = $("#gates");
-  const readout = $("#readout");
-  const tabsRoot = $("#scene-tabs");
-  const toggle = $("#scene-toggle");
-  if (!gatesRoot || !readout || !tabsRoot) return;
-
-  // The four answers, with the active one lit.
-  const gateEls = new Map();
-  for (const g of GATES) {
-    const node = el("li", { class: `gate g-${g.tone}` }, [
-      el("span", { class: "gate-m", text: g.mark, "aria-hidden": "true" }),
-      el("span", { class: "gate-t" }, [el("b", { text: g.name }), el("small", { text: g.note })]),
-    ]);
-    gateEls.set(g.level, node);
-    gatesRoot.appendChild(node);
-  }
-
-  // One tab per scene.
-  const tabEls = SCENES.map((s, i) =>
-    el("button", { type: "button", class: "scene-tab", role: "tab", text: s.label, "aria-selected": "false" })
-  );
-  tabEls.forEach((t, i) => { t.addEventListener("click", () => { show(i); hold(); }); tabsRoot.appendChild(t); });
-
-  const paint = (i) => {
-    const s = SCENES[i];
-    const g = gateFor(s.level);
-    const dest = chainById(s.target);
-    readout.className = `readout lv-${g.tone}`;
-    readout.textContent = "";
-    // Route: where it lives -> the chain the money landed on.
-    const route = el("p", { class: "ro-route" }, [
-      el("img", { src: logoSrc(s.icon), alt: "", width: "22", height: "22" }),
-      el("span", { text: s.shown }),
-      el("span", { class: "arrow", text: "→", "aria-hidden": "true" }),
-      dest ? el("img", { src: logoSrc(dest.logo), alt: "", width: "22", height: "22" }) : null,
-      el("span", { text: chainName(s.target) }),
-    ]);
-    const badge = el("span", { class: `badge tone-${g.tone}`, "aria-label": g.name }, [
-      el("span", { class: "glyph", text: g.mark, "aria-hidden": "true" }),
-      el("span", { text: g.name }),
-    ]);
-    readout.append(
-      route,
-      el("div", { class: "verdict-row" }, [badge]),
-      el("h3", { class: "ro-title", text: s.title }),
-      el("p", { class: "ro-detail", text: s.detail }),
-    );
-    gateEls.forEach((node, level) => node.classList.toggle("on", level === s.level));
-    tabEls.forEach((t, k) => { t.classList.toggle("on", k === i); t.setAttribute("aria-selected", String(k === i)); });
-  };
-
-  let at = 0, timer = null;
-  const show = (i) => { at = i; if (still) return paint(i); readout.classList.add("fade"); setTimeout(() => { paint(i); readout.classList.remove("fade"); }, 220); };
-  const start = () => { if (still || timer) return; timer = setInterval(() => show((at + 1) % SCENES.length), 4600); };
-  const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
-  const hold = () => { stop(); setPaused(true); };
-  const setPaused = (p) => { toggle.textContent = p ? "Play" : "Pause"; toggle.setAttribute("aria-pressed", String(p)); };
-
-  toggle.addEventListener("click", () => { if (timer) { stop(); setPaused(true); } else { start(); setPaused(false); } });
-  if (still) toggle.hidden = true;
-
-  paint(0);
-  start();
-  setPaused(still);
-}
 
 // Two tabs: Check and Explained, driven by the hash. Any link into the guide opens Explained; everything else, Check.
 function mountTabs() {
@@ -232,23 +166,22 @@ function init() {
   const result = $("#result");
   const btn = $("#go");
   populateChains(chain);
-  mountChainPicker(chain);
+  const picker = mountChainPicker(chain);
   renderChainrow($("#chainrow"));
-  mountSceneFlow();
   mountTabs();
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const address = addr.value.trim();
-    const target = Number(chain.value);
-    if (!address) return;
+  // One real check: it reads the 32 chains, renders the result card, and mirrors the run in the wheel. Shared by the
+  // form and by the wheel's "See the full answer →", so there is only ever one network run per check.
+  const runCheck = async (address, target) => {
     btn.disabled = true;
     const prev = btn.textContent;
     btn.textContent = "Reading chains…";
     result.textContent = "";
     result.appendChild(el("p", { class: "loading", text: `Reading ${CHAINS.length} chains for ${address}…` }));
+    const p = lookup(address, target, { loadShard });
+    flow?.show(address, target, p); // light the wheel with the same promise
     try {
-      const res = await lookup(address, target, { loadShard });
+      const res = await p;
       renderResult(result, address, target, res);
     } catch (err) {
       result.textContent = "";
@@ -257,6 +190,35 @@ function init() {
       btn.disabled = false;
       btn.textContent = prev;
     }
+  };
+
+  // The wheel of blockchains: the interactive flow. Every click runs a real recovery check; the ring halts under the
+  // pointer so a coin is clickable, and rapid clicks cancel the in-flight check (flow's token/still logic).
+  const flow = mountFlow({
+    rig: $("#rig"),
+    dests: $("#dests"),
+    readout: $("#readout"),
+    toggle: $("#flow-toggle"),
+    chains: CHAINS,
+    targetById: chainById,
+    still,
+    check: (address, to) => lookup(address, to, { loadShard }),
+    onOpen: (address, target) => {
+      addr.value = address;
+      chain.value = String(target);
+      picker.sync();
+      result.scrollIntoView({ behavior: still ? "auto" : "smooth", block: "start" });
+      runCheck(address, target);
+    },
+    onPlay: () => { result.textContent = ""; }, // taking over the wheel clears the old result card
+  });
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const address = addr.value.trim();
+    const target = Number(chain.value);
+    if (!address) return;
+    runCheck(address, target);
   });
 }
 

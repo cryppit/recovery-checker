@@ -2,7 +2,7 @@
 // gate tone must be one the page knows, and the addresses must be well formed. These are pure checks — no I/O.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { SCENES, GATES, gateFor } from "../src/scenes.js";
+import { SCENES, GATES, LEVELS, gateFor } from "../src/scenes.js";
 import { CHAINS } from "../src/chains.js";
 
 const TONES = new Set(["yes", "no", "danger", "unknown"]);
@@ -31,7 +31,15 @@ test("gateFor returns undefined for an unknown level", () => {
   assert.equal(gateFor("not-a-level"), undefined);
 });
 
-test("all four verdict answers are shown at least once in the flow", () => {
+test("every verdict level has a gate (the wheel renders a gate per possible answer)", () => {
+  for (const level of LEVELS) assert.ok(gateFor(level), `no gate for verdict level ${level}`);
+  // GATES and LEVELS must be the same set, so the wheel shows exactly the answers that can occur.
+  assert.deepEqual([...GATES.map((g) => g.level)].sort(), [...LEVELS].sort());
+});
+
+test("the four demonstrated answers each appear in a scene", () => {
   const shown = new Set(SCENES.map((s) => s.level));
-  for (const g of GATES) assert.ok(shown.has(g.level), `no scene demonstrates ${g.level}`);
+  for (const level of ["yes-with-risk", "danger", "likely-no", "unknown"]) {
+    assert.ok(shown.has(level), `no scene demonstrates ${level}`);
+  }
 });
