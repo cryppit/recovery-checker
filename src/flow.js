@@ -1,6 +1,6 @@
 // The flow picture: four real addresses run into the check and land on the recovery answer each one really gets. It
 // plays a demo on its own; people can take over by picking an address and any chain it may have landed on, and a real
-// recovery check runs. Ported from Safe to Send's wheel, EVM-only: the two counter-rotating rings are the 32 chains we
+// recovery check runs. Ported from Safe to Send's wheel, EVM-only: the two counter-rotating rings are the 33 chains we
 // read, split in half. Plain DOM and SVG; wires are drawn from where the pieces actually sit, so the same picture works
 // on a wide screen and on a phone. Nothing here signs or deploys — reading a chain needs no key.
 import { SCENES, GATES } from "./scenes.js";
@@ -16,7 +16,7 @@ const shorten = (a) => (a.length > 16 ? `${a.slice(0, 6)}…${a.slice(-4)}` : a)
 export function mountFlow({ rig, dests, readout, toggle, chains, targetById, check, onOpen, onPlay, still }) {
   const coinImg = (c) => { const i = make("img"); i.src = `logos/${c.logo}.svg`; i.alt = ""; i.width = 24; i.height = 24; return i; };
   const items = SCENES.map((s) => ({ ...s }));
-  // EVM-only: both rings are the 32 chains we read, split into two disjoint halves so each chain is one coin.
+  // EVM-only: both rings are the 33 chains we read, split into two disjoint halves so each chain is one coin.
   const ringOuter = chains.filter((_, i) => i % 2 === 0);
   const ringInner = chains.filter((_, i) => i % 2 === 1);
 
