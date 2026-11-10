@@ -36,6 +36,19 @@ const safeFacts = (safeVersion, destFactoryPresent) => ({
   destFactoryPresent,
 });
 
+// Same Safe-elsewhere shape, but the destination is a zkSync-stack chain (ZKsync Era 324).
+const zkSafeFacts = (safeVersion, destFactoryPresent) => ({
+  address: "0x" + "ab".repeat(20),
+  target: 324,
+  chains: {
+    1: { code: "0x6080", nonce: 1, safe: { threshold: 2, owners: 3, signers: [] } },
+    324: { code: "0x", nonce: 0 },
+  },
+  abstractWallet: false,
+  safeVersion,
+  destFactoryPresent,
+});
+
 // ---- Safe version branches (pure) ----
 
 test("v1.4.1 Safe, factory present on destination: yes-with-risk, safe-redeploy, with the deploy-race warning", () => {
@@ -126,6 +139,26 @@ test("an address never used anywhere: unknown, unused", async () => {
   const r = recover(await factsFor("unused-on-bnb"));
   assert.equal(r.class, "unused");
   assert.equal(r.recoverable, "unknown");
+});
+
+test("CREATE2 Safe but the destination is a zkSync-stack chain: likely-no, safe-zk-destination, no steps", () => {
+  const r = recover(zkSafeFacts("v1.4.1", true)); // even a 'present' factory can't reproduce the address on Era
+  assert.equal(r.class, "safe-zk-destination");
+  assert.equal(r.recoverable, "likely-no");
+  assert.equal(r.steps.length, 0, "a zkSync-stack destination must not get redeploy steps");
+});
+
+test("a Safe already deployed on the destination chain: danger, occupied, verify-owners warning", () => {
+  const f = {
+    address: "0x" + "cd".repeat(20),
+    target: 56,
+    chains: { 56: { code: "0x6080", nonce: 1, safe: { threshold: 2, owners: 3, signers: [] } } },
+    abstractWallet: false,
+  };
+  const r = recover(f);
+  assert.equal(r.class, "occupied");
+  assert.equal(r.recoverable, "danger");
+  assert.ok(r.warnings.some((w) => /verify|owners/i.test(w)), "must tell the user to verify the Safe's owners");
 });
 
 // ---- Shape + purity ----

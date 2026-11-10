@@ -20,7 +20,7 @@
 // classify is "unknown", never a guess, and we never offer a recovery step for a case we do not understand.
 import { kindOfCode } from "./classify.js";
 import { chainName } from "./chains.js";
-import { safeModel } from "./safe.js";
+import { safeModel, ZK_STACK_CHAINS } from "./safe.js";
 
 const WINTERMUTE = "this is how the 2022 Wintermute/Optimism 20M OP theft happened: a stranger redeployed a Safe at the victim's CREATE2 address first and took the funds.";
 
@@ -91,6 +91,20 @@ export function recover(facts) {
 
     // CREATE2 (v1.3.0 / v1.4.1): redeployable only if the matching SafeProxyFactory is live on the destination.
     if (model === "create2") {
+      // A zkSync/Era-stack destination derives contract addresses by a different formula, so even a CREATE2 Safe
+      // cannot be reproduced at this address here — not recoverable, regardless of whether a factory has code.
+      if (ZK_STACK_CHAINS.has(target)) {
+        return out({
+          class: "safe-zk-destination",
+          recoverable: "likely-no",
+          title: `Very likely not recoverable: a zkSync-stack destination`,
+          headline: `This is a ${s.threshold}-of-${s.owners} Gnosis Safe (${version}) on ${where}, but ${dst} is a zkSync/Era-stack chain that derives contract addresses by a different formula than Ethereum. The identical Safe cannot be reproduced at this address on ${dst}, so funds there are very likely unrecoverable. (jonluca/safe-everywhere excludes zkSync for exactly this reason.)`,
+          warnings: [
+            `${dst} uses EraVM address derivation; the same factory, singleton and saltNonce do NOT yield the same address here, so the Safe cannot be redeployed at this address.`,
+            "Ignore anyone who claims they can recover these funds on a zkSync-stack chain.",
+          ],
+        });
+      }
       if (facts.destFactoryPresent === true) {
         return out({
           class: "safe-redeploy",

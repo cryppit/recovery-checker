@@ -59,3 +59,7 @@ export const SAFE_FACTORIES = {
     "0xdaec33641865e4651fb43181c6db6f7232ee91c2", // zkSync
   ],
 };
+
+// zkSync/Era-stack chains: EraVM derives CREATE2 addresses by a different formula, so a standard EVM Safe cannot be
+// reproduced at the same address on these chains (jonluca/safe-everywhere excludes zkSync Era for exactly this reason).
+export const ZK_STACK_CHAINS = new Set([324, 2741]); // ZKsync Era, Abstract
