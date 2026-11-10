@@ -335,6 +335,19 @@
   <p class="lede">Paste the address and pick the chain the money landed on. We read the chains and tell you the honest answer: whether it can be recovered, and the risky steps if it can. Some losses — like Abstract Global Wallets — usually can't be recovered, and we say so.</p>
   <span class="stamp" title="We hold no keys, sign nothing, and never deploy.">Keyless · read-only · we never deploy or sign</span>
 
+  <section class="stage" id="flow" aria-labelledby="flow-h">
+    <div class="stage-head">
+      <div>
+        <h2 id="flow-h">Four real addresses. <span class="hl">One honest answer.</span></h2>
+        <p class="mute">Examples — every click runs a real check. Pick an address, then the chain it landed on.</p>
+      </div>
+      <button type="button" class="demo-toggle" id="flow-toggle">Pause demo</button>
+    </div>
+    <div class="rig" id="rig"></div>
+    <div class="dests" id="dests"></div>
+    <div class="readout" id="readout" aria-live="off"></div>
+  </section>
+
   <form id="f" autocomplete="off">
     <div class="row">
       <div>
@@ -364,18 +377,6 @@
 
   <div id="result" aria-live="polite"></div>
 
-  <section class="stage" id="flow" aria-labelledby="flow-h">
-    <div class="stage-head">
-      <div>
-        <h2 id="flow-h">Four real addresses. <span class="hl">One honest answer.</span></h2>
-        <p class="mute">Examples — every click runs a real check. Pick an address, then the chain it landed on.</p>
-      </div>
-      <button type="button" class="demo-toggle" id="flow-toggle">Pause demo</button>
-    </div>
-    <div class="rig" id="rig"></div>
-    <div class="dests" id="dests"></div>
-    <div class="readout" id="readout" aria-live="off"></div>
-  </section>
 
   <section class="reads" aria-labelledby="reads-h">
     <h2 class="rows-h" id="reads-h">The chains we read</h2>
