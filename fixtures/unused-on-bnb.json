@@ -1,0 +1,87 @@
+{
+ "address": "0x91ced670bc23ee850c70311f55f01520c9ca6ef9",
+ "target": 56,
+ "recordedAt": "2026-10-26T07:40:46.429Z",
+ "store": {
+  "1": {
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x"
+  },
+  "10": {
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x",
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0"
+  },
+  "56": {
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x",
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0"
+  },
+  "100": {
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x",
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0"
+  },
+  "130": {
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x",
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0"
+  },
+  "146": {
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x",
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0"
+  },
+  "324": {
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x",
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0"
+  },
+  "999": {
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x",
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0"
+  },
+  "2741": {
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x",
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0"
+  },
+  "4663": {
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x"
+  },
+  "5000": {
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x"
+  },
+  "8453": {
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x"
+  },
+  "42161": {
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x",
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0"
+  },
+  "42220": {
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x"
+  },
+  "43114": {
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x"
+  },
+  "57073": {
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x"
+  },
+  "59144": {
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x"
+  },
+  "80094": {
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x"
+  },
+  "81457": {
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x"
+  },
+  "534352": {
+   "eth_getCode [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x",
+   "eth_getTransactionCount [\"0x91ced670bc23ee850c70311f55f01520c9ca6ef9\",\"latest\"]": "0x0"
+  }
+ }
+}

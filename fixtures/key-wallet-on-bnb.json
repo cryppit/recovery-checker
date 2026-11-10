@@ -1,0 +1,87 @@
+{
+ "address": "0x28C6c06298d514Db089934071355E5743bf21d60",
+ "target": 56,
+ "recordedAt": "2026-10-26T07:41:13.898Z",
+ "store": {
+  "1": {
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x11fe68d",
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x"
+  },
+  "10": {
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x1",
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x"
+  },
+  "56": {
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x",
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x2a"
+  },
+  "100": {
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x",
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x0"
+  },
+  "130": {
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x"
+  },
+  "146": {
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x"
+  },
+  "324": {
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x",
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x0"
+  },
+  "999": {
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x",
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x0"
+  },
+  "2741": {
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x"
+  },
+  "4663": {
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x",
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x0"
+  },
+  "5000": {
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x"
+  },
+  "8453": {
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x19",
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x"
+  },
+  "42161": {
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x",
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x0"
+  },
+  "42220": {
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x"
+  },
+  "43114": {
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x"
+  },
+  "57073": {
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x"
+  },
+  "59144": {
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x"
+  },
+  "80094": {
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x"
+  },
+  "81457": {
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x0",
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x"
+  },
+  "534352": {
+   "eth_getCode [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x",
+   "eth_getTransactionCount [\"0x28c6c06298d514db089934071355e5743bf21d60\",\"latest\"]": "0x0"
+  }
+ }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "recovery-checker",
+  "version": "0.1.0",
+  "description": "Sent money to a smart-wallet address on the wrong chain? Paste the address and the chain it landed on: see whether it can be recovered, and the risky steps if it can. Keyless, read-only.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node --test \"test/*.test.js\""
+  }
+}
